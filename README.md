@@ -198,7 +198,7 @@ OpenCV MJPEG viewer for the authenticated stream URL.
 
 ## Inspired by and porting notes
 
-[`esp32cam/server.py`](esp32cam/server.py) and [`streaming_client_1.py`](streaming_client_1.py) are adapted from Andy Gelme’s [`esp32_cam`](https://github.com/geekscape/aiko_engine_mp/tree/main/examples/esp32_cam) example in [aiko_engine_mp](https://github.com/geekscape/aiko_engine_mp) (commit [`479cf95`](https://github.com/geekscape/aiko_engine_mp/commit/479cf9533c967ccb0adad47072e7c15290463a71)). Those files remain under the upstream [**AGPL-3.0 licence**](licence/aiko_engine_mp-License) ([source](https://github.com/geekscape/aiko_engine_mp/blob/master/License)).
+[`esp32cam/server.py`](esp32cam/server.py) and [`streaming_client_1.py`](streaming_client_1.py) are adapted from Andy Gelme’s [`esp32_cam`](https://github.com/geekscape/aiko_engine_mp/tree/master/examples/esp32_cam) example in [aiko_engine_mp](https://github.com/geekscape/aiko_engine_mp) (commit [`479cf95`](https://github.com/geekscape/aiko_engine_mp/commit/479cf9533c967ccb0adad47072e7c15290463a71)). Those files remain under the upstream [**AGPL-3.0 licence**](licence/aiko_engine_mp-License) ([source](https://github.com/geekscape/aiko_engine_mp/blob/master/License)).
 
 Everything else written during the [Cursor Melbourne Hardware Hack](https://luma.com/qf7urg29) — flash/monitor tooling, config layout, docs, etc. — is **MIT** and free to use as you wish (see [Licence](#licence)).
 
