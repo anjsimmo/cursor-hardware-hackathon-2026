@@ -4,7 +4,7 @@ Authenticated MJPEG camera server for the **Freenove ESP32-WROVER** board (and c
 
 Vibe coded by Angie Simmons and Nick Meinhold at the [Cursor Melbourne Hardware Hack](https://luma.com/qf7urg29) (24 May 2026, Stone & Chalk Melbourne).
 
-**Inspired by:** Andy Gelme’s [`esp32_cam`](https://github.com/geekscape/aiko_engine_mp/tree/main/examples/esp32_cam) — [`server.py`](esp32cam/server.py) and [`streaming_client_1.py`](streaming_client_1.py) are adapted from that example ([AGPL-3.0](licence/aiko_engine_mp-License)). See [Inspired by and porting notes](#inspired-by-and-porting-notes) for Freenove firmware changes.
+**Inspired by:** Andy Gelme’s [`esp32_cam`](https://github.com/geekscape/aiko_engine_mp/tree/master/examples/esp32_cam) — [`server.py`](esp32cam/server.py) and [`streaming_client_1.py`](streaming_client_1.py) are adapted from that example ([AGPL-3.0](licence/aiko_engine_mp-License)). See [Inspired by and porting notes](#inspired-by-and-porting-notes) for Freenove firmware changes.
 
 ## Features
 
