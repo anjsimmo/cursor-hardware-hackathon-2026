@@ -21,7 +21,34 @@ Vibe coded by Angie Simmons and Nick Meinhold at the [Cursor Melbourne Hardware 
 
 ## Quick start
 
-### 1. Configure credentials
+### 1. Host environment (one-time setup)
+
+`flash.sh` and `monitor.sh` use a **conda** Python env with ESP32 host tools. They default to an env named **`thonny`** (Angie’s local name — yours can differ; set `CONDA_ENV` if so):
+
+```bash
+conda create -n thonny python=3.10 -y
+conda activate thonny
+pip install thonny esptool mpremote pyserial
+```
+
+| Package | Purpose |
+|---------|---------|
+| **thonny** | Optional GUI IDE for MicroPython on the board |
+| **esptool** | Flash `.bin` firmware (`flash.sh --with-firmware`) |
+| **mpremote** | Upload `.py` files to the board (`flash.sh`) |
+| **pyserial** | Serial monitor (`monitor.sh`) |
+
+You do **not** need to open Thonny for day-to-day use — `flash.sh` and `monitor.sh` replace it on the command line.
+
+**Firmware flashing:** Thonny **4.1.7** has a bug that blocks flashing a custom `.bin` through its installer. Use **`./flash.sh --with-firmware`** instead — it calls **`esptool`** directly and works for the camera-enabled MicroPython build in this repo.
+
+Different env name? e.g. `CONDA_ENV=esp32cam ./flash.sh` after creating and activating that env with the same `pip install` line.
+
+On Linux, add your user to **`dialout`** for serial port access. Close Thonny or other apps using the port before running `flash.sh` or `monitor.sh`.
+
+For the laptop stream viewer, install OpenCV separately in any Python env (`pip install opencv-python`).
+
+### 2. Configure credentials
 
 ```bash
 cp esp32cam/config.example.py esp32cam/config.py
@@ -30,14 +57,14 @@ cp esp32cam/config.example.py esp32cam/config.py
 
 `config.py` is gitignored and will not be committed.
 
-### 2. Flash firmware and upload code (first time)
+### 3. Flash firmware and upload code (first time)
 
 ```bash
 conda activate thonny
 ./flash.sh --with-firmware
 ```
 
-### 3. Watch serial output
+### 4. Watch serial output
 
 ```bash
 ./monitor.sh --reset
@@ -45,7 +72,11 @@ conda activate thonny
 
 Look for `Stream URL: http://192.168.x.x/<uid>/<pwd>` in the log.
 
-### 4. View the stream
+### 5. View the stream
+
+Open the stream URL in a browser, or use the laptop viewer:
+
+![ESP32 camera stream in the browser](screenshot-esp32cam-in-browser.png)
 
 ```bash
 ./streaming_client_1.py --url http://<esp32-ip>/<uid>/<pwd>
@@ -129,7 +160,7 @@ MicroPython v1.18-74-gfeeeb5ea3 on 2022-02-02; ESP32-cam module (i2s) with ESP32
 2. Built from [lemariva/micropython-camera-driver](https://github.com/lemariva/micropython-camera-driver)
 3. Documented in [Freenove Chapter 23 Camera Web Server](https://docs.freenove.com/projects/fnk0046/en/latest/fnk0046/codes/Python/30_Camera_Web_Server.html)
 
-Flash camera firmware + upload code:
+Flash camera firmware + upload code (use `./flash.sh`, not Thonny’s firmware installer — see [Quick start §1](#1-host-environment-one-time-setup)):
 
 ```bash
 conda activate thonny
@@ -164,22 +195,6 @@ OpenCV MJPEG viewer for the authenticated stream URL.
 ```bash
 ./streaming_client_1.py --url http://<esp32-ip>/<uid>/<pwd>
 ```
-
-## Host environment
-
-Use a Python environment with `esptool` and `mpremote`. This repo assumes a conda env named **`thonny`**:
-
-```bash
-conda activate thonny
-```
-
-| Tool | Purpose |
-|------|---------|
-| esptool | Flash `.bin` firmware |
-| mpremote | Upload `.py` files to the board |
-| pyserial | Serial monitor |
-
-You must be in the **`dialout`** group (or otherwise have access to the serial device). Close Thonny before running `flash.sh` or `monitor.sh`.
 
 ## Inspired by and porting notes
 
@@ -228,6 +243,7 @@ Copyright (c) 2026 Angie Simmons and Nick Meinhold (MIT hackathon portions).
 
 | Symptom | Fix |
 |---------|-----|
+| Thonny firmware install fails | Known issue in Thonny 4.1.7 — use `./flash.sh --with-firmware` (esptool) instead |
 | `serial port busy` | Close Thonny or other apps using the port |
 | `config missing` warning | `cp esp32cam/config.example.py esp32cam/config.py`, edit, and re-flash |
 | `Camera deinit Failed` on boot | Harmless on cold boot — ignored |
